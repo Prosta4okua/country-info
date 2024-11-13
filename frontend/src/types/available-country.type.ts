@@ -1,4 +1,4 @@
 export type AvailableCountryType = {
-	countryCode: string;
-	name: string;
+  countryCode: string;
+  name: string;
 };

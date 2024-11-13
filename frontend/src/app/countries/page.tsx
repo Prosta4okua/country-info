@@ -1,6 +1,14 @@
 "use client";
 
-import { Box, CircularProgress, List, ListItem, Pagination, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  CircularProgress,
+  List,
+  ListItem,
+  Pagination,
+  Stack,
+  Typography,
+} from "@mui/material";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import superagent from "superagent";
@@ -15,7 +23,9 @@ const CountryListPage = () => {
   useEffect(() => {
     const fetchCountries = async () => {
       try {
-        const data: AvailableCountryType[] =  (await superagent.get("http://localhost:3000/countries")).body;
+        const data: AvailableCountryType[] = (
+          await superagent.get("http://localhost:3000/countries")
+        ).body;
 
         setCountries(data);
       } catch (error) {
@@ -30,9 +40,15 @@ const CountryListPage = () => {
 
   const indexOfLastCountry = currentPage * countriesPerPage;
   const indexOfFirstCountry = indexOfLastCountry - countriesPerPage;
-  const currentCountries = countries.slice(indexOfFirstCountry, indexOfLastCountry);
+  const currentCountries = countries.slice(
+    indexOfFirstCountry,
+    indexOfLastCountry,
+  );
 
-  const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+  const handlePageChange = (
+    event: React.ChangeEvent<unknown>,
+    value: number,
+  ) => {
     setCurrentPage(value);
   };
 
@@ -46,13 +62,19 @@ const CountryListPage = () => {
 
   return (
     <Box textAlign="center" alignContent="center">
-      <Typography variant="h1" align="center">Country List</Typography>
+      <Typography variant="h1" align="center">
+        Country List
+      </Typography>
       {countries.length === 0 ? (
         <Typography variant="body1">No countries available.</Typography>
       ) : (
         <List>
           {currentCountries.map((country) => (
-            <ListItem key={country.countryCode} alignItems="center" sx={{ justifyContent: "center" }}>
+            <ListItem
+              key={country.countryCode}
+              alignItems="center"
+              sx={{ justifyContent: "center" }}
+            >
               <Link href={`/countries/${country.countryCode}`} passHref>
                 <Typography variant="body1" component="div" align="center">
                   {country.name}
